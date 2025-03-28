@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Socket.IO App</title>
+  </head>
+  <body>
+    <h1>My first Socket.IO App</h1>
+    <p id="demo"></p>
+    <div action="">
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message" required />
+      <button type="submit" id="send" onclick="send()">Send</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const demo = document.getElementById("demo");
+      const socket = io();
+      //   socket.on("message", function (mes) {
+      //     demo.textContent = "New message: " + mes;
+      //     // console.log(mes);
+      //   });
+
+      //   socket.on("myEvent", function (mes) {
+      //     demo.innerHTML = `New event received!<br /> ${mes}`;
+      //     // console.log("New event received!");
+      //   });
+
+      //   send data to server
+      //   function send() {
+      //     const message = document.getElementById("message").value;
+      //     // alert(message);
+      //     socket.send(message + Math.random() * 1000);
+      //   }
+
+      // set custom event and send data to server
+      function send() {
+        const message = document.getElementById("message");
+        socket.emit("customEvent", message.value + Math.random() * 1000);
+        message.value = "";
+      }
+    </script>
+  </body>
+</html>
