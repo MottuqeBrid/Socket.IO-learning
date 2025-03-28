@@ -17,7 +17,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const demo = document.getElementById("demo");
-      const socket = io();
+      // const socket = io();
       //   socket.on("message", function (mes) {
       //     demo.textContent = "New message: " + mes;
       //     // console.log(mes);
@@ -36,11 +36,23 @@
       //   }
 
       // set custom event and send data to server
-      function send() {
-        const message = document.getElementById("message");
-        socket.emit("customEvent", message.value + Math.random() * 1000);
-        message.value = "";
-      }
+      // function send() {
+      //   const message = document.getElementById("message");
+      //   socket.emit("customEvent", message.value + Math.random() * 1000);
+      //   message.value = "";
+      // }
+
+      // broadcast
+      // socket.on("myBroadcast", (data)=>{
+      //   demo.innerHTML += `<p>Broadcast: ${data}</p>`;
+      //   // console.log("Broadcast received!");
+      // })
+
+      // namespace
+      const socket = io("/sell");
+      socket.on("myBroadcast", (data) => {
+        demo.innerHTML += `<p>Namespace: ${data}</p>`;
+      });
     </script>
   </body>
 </html>
